@@ -1,14 +1,18 @@
 import React from 'react';
+import TaskItem from './TaskItem';
 
-function TaskList({ tasks, onDeleteTask }) {
+function TaskList({ tasks, onDeleteTask, onToggleComplete }) {
   return (
     <div className="mt-12 w-full lg:max-w-2xl bg-white min-w-min rounded shadow-sm">
         <ul className="flex flex-col">
             {tasks.map((task, index) => (
-                <li key={index} className="text-slate-700 text-lg flex justify-between border-b-2 p-4">
-                {task}
-                <button onClick={() => onDeleteTask(index)} className="ml-4 p-2 bg-red-400 rounded text-white leading-none text-sm">Delete</button>
-                </li>
+                <TaskItem 
+                    key={index}
+                    task={task}
+                    completed={task.completed}
+                    onToggleComplete={() => onToggleComplete(index)}
+                    onDelete={() => onDeleteTask(index)}
+                />
             ))}
         </ul>
     </div>

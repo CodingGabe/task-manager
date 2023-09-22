@@ -12,8 +12,12 @@ class App extends Component {
   addTask = () => {
     const { tasks, newTask } = this.state;
     if (newTask) {
+      const newTaskObject = {
+        task: newTask,
+        completed: false,
+      };
       this.setState({
-        tasks: [...tasks, newTask],
+        tasks: [...tasks, newTaskObject],
         newTask: '',
       });
     }
@@ -21,8 +25,9 @@ class App extends Component {
 
   deleteTask = (index) => {
     const { tasks } = this.state;
-    tasks.splice(index, 1);
-    this.setState({ tasks });
+    const updatedTasks = [...tasks]; // Create a copy of the tasks array
+    updatedTasks.splice(index, 1); // Remove the task at the specified index
+    this.setState({ tasks: updatedTasks });
   };
   
   handleKeyPress = (e) => {
@@ -30,10 +35,23 @@ class App extends Component {
       this.addTask();
     }
   };
+
+  onToggleComplete = (index) => {
+    const { tasks } = this.state;
+    const updatedTasks = [...tasks]; // Create a copy of the tasks array
+    updatedTasks[index] = {
+      ...updatedTasks[index],
+      completed: !updatedTasks[index].completed, // Toggle completed state
+    };
+    this.setState({ tasks: updatedTasks });
+  };
   
 
   render() {
     const { tasks } = this.state;
+    // Create separate lists for active and completed tasks
+    const activeTasks = tasks.filter((task) => !task.completed);
+    const completedTasks = tasks.filter((task) => task.completed);
 
     return (
       <div className="App bg-slate-300">
@@ -54,11 +72,22 @@ class App extends Component {
               />
               <button onClick={this.addTask} className="rounded bg-green-500 py-2 px-4 ml-4 lg:ml-0 text-center text-white">Add Task</button>
             </div>
-            {tasks.length === 0 ? (
-              <p className="mt-6">No task to display.</p>
-            ) : (
-              <TaskList tasks={tasks} onDeleteTask={this.deleteTask} />
+            {/* Display active tasks */}
+            {activeTasks.length > 0 && (
+              <div>
+                <h2 className="mt-6">Active Tasks</h2>
+                <TaskList tasks={activeTasks} onDeleteTask={this.deleteTask} onToggleComplete={this.onToggleComplete} />
+              </div>
             )}
+            {/* Display completed tasks */}
+            {completedTasks.length > 0 && (
+              <div>
+                <h2>Completed Tasks</h2>
+                <TaskList tasks={completedTasks} onDeleteTask={this.deleteTask} onToggleComplete={this.onToggleComplete} />
+              </div>
+            )}
+            {/* Display a message if there are no tasks */}
+            {tasks.length === 0 && <p className="mt-6">No task to display.</p>}
           </div>
         </main>
       </div>
