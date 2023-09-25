@@ -12,7 +12,7 @@ function TaskItem({ task, completed, onToggleComplete, onDelete }) {
           <span className={`text-lg ${completed ? 'line-through text-gray-500' : 'text-gray-800'}`}>{task.task}</span>
         </label>
         <button
-          className="px-2 py-1 bg-red-400 text-white rounded hover:bg-red-600"
+          className="px-2 py-1 bg-red-400 text-white rounded hover:bg-red-600 delete"
           onClick={onDelete}
         >
           Delete

@@ -1,7 +1,136 @@
-/* @import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities'; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 .App {
   height: 100vh;
+  background-color: rgb(203 213 225);
+}
+
+.task-header {
+  background-color: #fff;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+  margin-bottom: 3rem;
+}
+.task-header h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  color:rgb(38 38 38);
+}
+
+.task-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.task-content input,
+button {
+  padding: .75rem 1.25rem;
+  border-radius: .25rem;
+  border: none;
+}
+input:focus-visible {
+  outline: 2px solid #22c55e;
+}
+
+button {
+  color: #fff;
+  font-weight: 700;
+  margin-left: 1rem;
+}
+button.add {
+  background-color: #22c55e;
+}
+button.add:hover {
+  background-color: #15803d;
+}
+button.delete {
+  padding: .5rem .75rem;
+  font-size: .75rem;
+  background-color: #ef4444;
+}
+button.delete:hover {
+  background-color: #dc2626;
+}
+
+.task-list {
+  margin: 2.75rem auto;
+  width: 100%;
+  max-width: 40rem;
+}
+.task-list ul {
+  display: flex;
+  flex-direction: column;
+}
+.task-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.task-list label {
+  display: flex;
+  align-items: center;
+}
+label > span {
+  margin-left: .5rem;
+}
+.text-gray-500 {
+  color: #6b7280;
+}
+.text-gray-800 {
+  color: #1f2937;
+}
+.line-through {
+  text-decoration: line-through;
+}
+.active-tasks {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+.active-tasks h2,
+.comp-tasks h2 {
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+.comp-tasks {
+  background-color: #bbf7d0;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+@media (min-width: 576px) {
+  button {
+    margin-left: 0;
+  }
 }

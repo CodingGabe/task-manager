@@ -60,7 +60,7 @@ class App extends Component {
             <h1 className="text-3xl font-bold text-center text-neutral-900">Task Management App</h1>
           </div>
           {/* Add form and task list components here */}
-          <div className="flex flex-wrap justify-center flex-col justify-items-center text-center mx-auto">
+          <div className="task-content flex flex-wrap justify-center flex-col justify-items-center text-center mx-auto">
             <div>
               <input
                 type="text"
@@ -70,24 +70,26 @@ class App extends Component {
                 onKeyDown={this.handleKeyPress} // User can click Enter
                 className="rounded py-2 px-4 text-slate-700 focus-visible:outline-green-400"
               />
-              <button onClick={this.addTask} className="rounded bg-green-500 py-2 px-4 ml-4 lg:ml-0 text-center text-white">Add Task</button>
+              <button onClick={this.addTask} className="rounded bg-green-500 py-2 px-4 ml-4 lg:ml-0 text-center text-white add">Add Task</button>
             </div>
-            {/* Display active tasks */}
-            {activeTasks.length > 0 && (
-              <div>
-                <h2 className="mt-6">Active Tasks</h2>
-                <TaskList tasks={activeTasks} onDeleteTask={this.deleteTask} onToggleComplete={this.onToggleComplete} />
-              </div>
-            )}
-            {/* Display completed tasks */}
-            {completedTasks.length > 0 && (
-              <div>
-                <h2>Completed Tasks</h2>
-                <TaskList tasks={completedTasks} onDeleteTask={this.deleteTask} onToggleComplete={this.onToggleComplete} />
-              </div>
-            )}
-            {/* Display a message if there are no tasks */}
-            {tasks.length === 0 && <p className="mt-6">No task to display.</p>}
+            <div className="task-list">
+              {/* Display active tasks */}
+              {activeTasks.length > 0 && (
+                <div className="active-tasks">
+                  <h2 className="mt-6">Active Tasks</h2>
+                  <TaskList tasks={activeTasks} onDeleteTask={this.deleteTask} onToggleComplete={this.onToggleComplete} />
+                </div>
+              )}
+              {/* Display completed tasks */}
+              {completedTasks.length > 0 && (
+                <div className="comp-tasks">
+                  <h2>Completed Tasks</h2>
+                  <TaskList tasks={completedTasks} onDeleteTask={this.deleteTask} onToggleComplete={this.onToggleComplete} />
+                </div>
+              )}
+              {/* Display a message if there are no tasks */}
+              {tasks.length === 0 && <p className="mt-6">No task to display.</p>}
+            </div>
           </div>
         </main>
       </div>
